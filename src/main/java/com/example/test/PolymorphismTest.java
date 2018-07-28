@@ -3,9 +3,6 @@ package com.example.test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by lenovo on 2018/7/24.
- */
 public class PolymorphismTest {
     public void say(){
         System.out.println("hello");
