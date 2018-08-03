@@ -39,7 +39,6 @@ public class UserController implements CommandLineRunner {
     @ResponseBody
     @RequestMapping(value = "/all", produces = {"application/json;charset=UTF-8"})
     public Object findAllUser(){
-
         return userService.findAllUser();
     }
 
