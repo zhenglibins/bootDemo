@@ -10,22 +10,16 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -118,11 +112,11 @@ public class DatasourceConfig implements BeanDefinitionRegistryPostProcessor,Ini
         BeanDefinitionBuilder builder;
         for(Iterator var5 = dataSources.iterator(); var5.hasNext(); beanDefinitionRegistry.registerBeanDefinition(ds, builder.getBeanDefinition())) {
             ds = (String)var5.next();
-            builder = BeanDefinitionBuilder.genericBeanDefinition(DruidDataSource.class);
-            if(ds.equalsIgnoreCase(defaultDataSource)) {
-                builder.getBeanDefinition().setPrimary(true);
-            }
+        builder = BeanDefinitionBuilder.genericBeanDefinition(DruidDataSource.class);
+        if(ds.equalsIgnoreCase(defaultDataSource)) {
+            builder.getBeanDefinition().setPrimary(true);
         }
+    }
         System.out.println("数据源bean邦定");
     }
 
