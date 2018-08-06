@@ -25,18 +25,18 @@ public class ExecutorTest {
 	}
 	public static void submitTest() {
 		ExecutorService executorService = Executors.newSingleThreadExecutor();  
-		 
-		Future f = executorService.submit(new Runnable() {  
-		    public void run() {  
-		        System.out.println("Asynchronous task");  
-		        try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
+			Future f = executorService.submit(new Runnable() {
+				public void run() {
+					System.out.println("Asynchronous task");
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-		    }  
-		});  
+			});
 		try {
 			System.out.println(f.get());
 		} catch (InterruptedException e) {

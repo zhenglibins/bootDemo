@@ -1,13 +1,12 @@
-package com.example.test;
 
 public class DeadLockTest {
 
 	public static void main(String[] args) {
-		BankIntface nong = new nongye("ũҵ����",1000),gong = new gongshang("��������",1000);
+		BankIntface nong = new nongye("农业银行",1000),gong = new gongshang("工商银行",1000);
 
 		for(int i = 0 ;i < 10;i++) {
 			new Thread(new userservice(nong,gong,i+2)).start();
-			
+
 		}
 
 		for(int i = 0 ;i < 10;i++) {
@@ -17,7 +16,7 @@ public class DeadLockTest {
 	}
 
 }
-//ת�˷���
+//转账服务
 class userservice implements Runnable{
 	BankIntface o1,o2;
 	int num;
@@ -29,11 +28,11 @@ class userservice implements Runnable{
 	}
 
 	public void run() {
-		
+
 		synchronized(o1) {
-			System.out.println(o2.name+"��"+o1.name+"ת��"+num+"Ԫ");
+			System.out.println(o2.name+"向"+o1.name+"转账"+num+"元");
 			o1.cun(num);
-			
+
 			synchronized(o2) {
 				o2.qu(num);
 			}
@@ -42,7 +41,7 @@ class userservice implements Runnable{
 }
 
 abstract class BankIntface{
-	
+
 	public int allmoney = 100;
 	public String name;
 	public synchronized void cun(int num) {

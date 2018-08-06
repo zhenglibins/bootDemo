@@ -9,8 +9,8 @@ public class ReadWriteLockTest {
 		rwOper();
 
 	}
-	
-	//ͬ�����������
+
+	//同对象读读操作
 	public static void rrOper() {
 		ReadWriteLock lock = new ReentrantReadWriteLock(true);
 		rwTest rw1 = new rwTest(lock);
@@ -20,64 +20,64 @@ public class ReadWriteLockTest {
 				@Override
 				public void run() {
 					rw1.read();
-					
+
 				}
-				
-			},"���߳�"+i).start(); 
+
+			},"读线程"+i).start();
 		}
 	}
-	
-	//ͬ�����д����
-		public static void rwOper() {
-			ReadWriteLock lock = new ReentrantReadWriteLock(true);
-			rwTest rw1 = new rwTest(lock);
 
-			for(int i = 0; i < 10;i++) {
-				if(i%2==0) {
-					new Thread(new Runnable() {
-						@Override
-						public void run() {						
-							rw1.read();	
-						}
-						
-					},"���߳�"+i).start(); 
-				}else {
-					new Thread(new Runnable() {
-						@Override
-						public void run() {						
-							rw1.write();	
-						}
-						
-					},"xie�߳�"+i).start(); 
-				}
+	//同对象读写操作
+	public static void rwOper() {
+		ReadWriteLock lock = new ReentrantReadWriteLock(true);
+		rwTest rw1 = new rwTest(lock);
+
+		for(int i = 0; i < 10;i++) {
+			if(i%2==0) {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						rw1.read();
+					}
+
+				},"读线程"+i).start();
+			}else {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						rw1.write();
+					}
+
+				},"xie线程"+i).start();
 			}
 		}
-	
-	//��ͬ�����������
-		public static void difrrOper() {
-			ReadWriteLock lock = new ReentrantReadWriteLock(true);
-			rwTest rw1 = new rwTest(lock);
-			rwTest rw2 = new rwTest(lock);
-			for(int i = 0; i < 10;i++) {
-				if(i%2==0) {
-					new Thread(new Runnable() {
-						@Override
-						public void run() {						
-							rw1.read();	
-						}
-						
-					},"���߳�"+i).start(); 
-				}else {
-					new Thread(new Runnable() {
-						@Override
-						public void run() {						
-							rw2.read();	
-						}
-						
-					},"2���߳�"+i).start(); 
-				}
+	}
+
+	//不同对象读读操作
+	public static void difrrOper() {
+		ReadWriteLock lock = new ReentrantReadWriteLock(true);
+		rwTest rw1 = new rwTest(lock);
+		rwTest rw2 = new rwTest(lock);
+		for(int i = 0; i < 10;i++) {
+			if(i%2==0) {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						rw1.read();
+					}
+
+				},"读线程"+i).start();
+			}else {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						rw2.read();
+					}
+
+				},"2读线程"+i).start();
 			}
 		}
+	}
 
 }
 
@@ -91,22 +91,22 @@ class rwTest {
 		lock.readLock().lock();
 		try {
 			for(int i = 0 ; i < 100;i++) {
-				System.out.println(Thread.currentThread().getName()+" ִ�ж�����"+i);
+				System.out.println(Thread.currentThread().getName()+" 执行读操作"+i);
 			}
 		}finally {
 			lock.readLock().unlock();
 		}
-		
+
 	}
 	public void write() {
 		lock.writeLock().lock();
 		try {
 			for(int i = 0 ; i < 100;i++) {
-				System.out.println(Thread.currentThread().getName()+" д����"+i);
+				System.out.println(Thread.currentThread().getName()+" 写操作"+i);
 			}
 		}finally {
 			lock.writeLock().unlock();
 		}
-		
+
 	}
 }

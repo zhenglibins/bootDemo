@@ -1,4 +1,3 @@
-package com.example.test;
 
 public class volatileTest {
 
@@ -11,7 +10,7 @@ public class volatileTest {
 		System.out.println(Thread.activeCount());
 		Thread.sleep(1000);
 		while(Thread.activeCount()==1) {
-			System.out.println("��������="+bank.getMoney());
+			System.out.println("最终数量="+bank.getMoney());
 			break;
 		}
 	}
@@ -24,7 +23,7 @@ class Bank{
 		synchronized(lock) {
 			money ++;
 		}
-		
+
 	}
 	public void substract() {
 		money --;
@@ -40,11 +39,11 @@ class UserOper implements Runnable{
 		this.bank = bank;
 	}
 	public void run() {
-		
+
 		for(int i = 0 ; i <1000000;i++) {
 			bank.add();
 		}
 		System.out.println(bank.getMoney());
 	}
-	
+
 }
