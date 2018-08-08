@@ -2,9 +2,15 @@ package com.example.constants;
 
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * Created by lenovo on 2018/8/4.
+ */
+
 public enum RedisKey {
 
     MY_FIRST_TEST("MY_FIRST_TEST", "我测试的hash-field", "MY_FIRST_TEST_HASH_key");
+
 
     private String name;
     private String desc;
@@ -16,6 +22,7 @@ public enum RedisKey {
         this.name = name;
         this.desc = desc;
     }
+
     RedisKey(String name, String desc,String father) {
         this.name = name;
         this.desc = desc;
@@ -50,6 +57,7 @@ public enum RedisKey {
         return timeUnit;
     }
 
+
     @Override
     public String toString() {
         return "RedisKey{" +
@@ -60,4 +68,5 @@ public enum RedisKey {
                 ", timeUnit=" + timeUnit +
                 '}';
     }
+
 }
