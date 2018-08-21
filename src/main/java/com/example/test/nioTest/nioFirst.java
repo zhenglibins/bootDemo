@@ -12,6 +12,34 @@ import java.nio.channels.FileChannel;
  */
 public class nioFirst {
     public static void main(String args[]){
+        testBuffer();
+
+    }
+
+    public static void testBuffer(){
+        ByteBuffer buf = ByteBuffer.allocate(48);
+        outputBuffer(buf);
+        buf.put((byte)2);
+        buf.put((byte)3);
+        System.out.println(buf.get());
+        outputBuffer(buf);
+        buf.flip();
+        outputBuffer(buf);
+        System.out.println(buf.get());
+        System.out.println(buf.get());
+        System.out.println(buf.get());
+        outputBuffer(buf);
+        buf.flip();
+        outputBuffer(buf);
+    }
+    public static void outputBuffer(ByteBuffer buffer ){
+        System.out.println("");
+        System.out.print("capacity: " + buffer.capacity() + ", ");
+        System.out.print("position: " + buffer.position() + ", ");
+        System.out.println("limit: " + buffer.limit());
+
+    }
+    public static void readFile(){
         RandomAccessFile aFile = null;
         try {
             File f = new File("banner.txt");
@@ -44,6 +72,5 @@ public class nioFirst {
                 e.printStackTrace();
             }
         }
-
     }
 }
