@@ -13,7 +13,7 @@ import org.springframework.cache.annotation.EnableCaching;
 		DataSourceAutoConfiguration.class
 })
 @EnableCaching
-@MapperScan("com.example.mapper")
+@MapperScan({"com.example.mapper","com.example.dao"})
 public class DemoApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);

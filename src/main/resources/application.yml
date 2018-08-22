@@ -32,6 +32,15 @@ mybatis:
 
 db:
   ds:
+    main:
+      name: test2
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/bootDemo
+      url: jdbc:mysql://127.0.0.1:3306/bootDemo
+      username: root
+      password: root
+      # 使用druid数据源
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
     db1:
       name: test
       url: jdbc:mysql://127.0.0.1:3306/zlb_test1

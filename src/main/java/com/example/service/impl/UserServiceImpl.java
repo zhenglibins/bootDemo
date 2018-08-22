@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 
+import com.example.dao.DemoDao;
 import com.example.ds.DS;
 import com.example.ds.DataSourceNames;
 import com.example.mapper.UserMapper;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/8/16.
@@ -19,6 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;//这里会报错，但是并不会影响
+    @Autowired
+    private DemoDao demodao;//这里会报错，但是并不会影响
 
     public int addUser(User user) {
 
@@ -34,6 +38,11 @@ public class UserServiceImpl implements UserService {
     @DS(DataSourceNames.DS2)
     public List<User> findAllUser() {
         return userMapper.selectAllUser();
+    }
+
+    @DS(DataSourceNames.MAIN)
+    public List<Map<String,String>> findDEMOUser(String idstr) {
+        return demodao.getUserInfo(idstr);
     }
 }
 

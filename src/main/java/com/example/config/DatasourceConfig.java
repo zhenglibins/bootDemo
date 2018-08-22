@@ -38,7 +38,7 @@ public class DatasourceConfig implements BeanDefinitionRegistryPostProcessor,Ini
 
     @Bean
     public MultipleDataSource multipleDataSource() {
-        return new MultipleDataSource(Lists.newArrayList(DataSourceNames.DS1,DataSourceNames.DS2));
+        return new MultipleDataSource(Lists.newArrayList(DataSourceNames.DS1,DataSourceNames.DS2,DataSourceNames.MAIN));
 }
 
     private ApplicationContext applicationContext;
@@ -76,7 +76,7 @@ public class DatasourceConfig implements BeanDefinitionRegistryPostProcessor,Ini
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dynamicDataSource);
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sessionFactory.setMapperLocations(resolver.getResources("classpath:mapping/**/*.xml"));
+        sessionFactory.setMapperLocations(resolver.getResources("classpath:mapping/*.xml"));
         List<Interceptor> interceptors = new ArrayList();
         Properties properties = new Properties();
         properties.put("dialect", "sqlserver");

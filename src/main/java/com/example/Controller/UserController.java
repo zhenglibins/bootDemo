@@ -73,4 +73,10 @@ public class UserController implements CommandLineRunner {
         System.out.println(propertiesgetConfig.getServer());
 
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/allDemo", produces = {"application/json;charset=UTF-8"})
+    public Object findDEMOUser(){
+        return userService.findDEMOUser("1000");
+    }
 }
