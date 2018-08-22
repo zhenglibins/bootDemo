@@ -11,6 +11,7 @@ public class CyclicBarrierTest {
 		new Thread(new stak(ba)) .start();
 		new Thread(new stak(ba)) .start();
 		new Thread(new stak(ba)) .start();
+		new Thread(new stak(ba)) .start();
 	}
 
 }

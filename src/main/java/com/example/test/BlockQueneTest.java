@@ -2,12 +2,13 @@ package com.example.test;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BlockQueneTest {
 	public static void main(String args[]) throws InterruptedException {
 		BlockingQueue queue = new ArrayBlockingQueue(1024);
-		 
-		producer pro = new producer(queue);
+        ConcurrentHashMap map;
+        producer pro = new producer(queue);
 		consumer con = new consumer(queue);
  
         new Thread(pro).start();
