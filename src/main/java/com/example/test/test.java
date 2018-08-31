@@ -3,18 +3,37 @@ package com.example.test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.concurrent.Callable;
+import java.util.HashMap;
+import java.util.concurrent.*;
 
 public class test {
 
 	public static void main(String[] args) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		LocalDateTime ldt = LocalDateTime.of(2018,8,14,23,59,59);
-		LocalDateTime templdt = ldt.truncatedTo(ChronoUnit.DAYS);
-		System.out.println(ldt);
-		System.out.println(templdt);
-		System.out.println(templdt.isAfter(LocalDateTime.now()));
-
+		testss();
+		HashMap hs;
+		System.out.println((7 & 2));
+		System.out.println((7 & 9));
 	}
 
+	public static void testss(){
+		ExecutorService executorService = Executors.newSingleThreadExecutor();
+		Callable<String> callable = new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				System.out.println("执行");
+				return "123";
+			}
+		};
+		Future<String> f = executorService.submit(callable);
+		executorService.submit(callable);
+		try {
+			System.out.println(f.get());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+
+		executorService.shutdown();
+	}
 }
