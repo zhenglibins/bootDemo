@@ -4,6 +4,9 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * test
+ */
 public class BlockQueneTest {
 	public static void main(String args[]) throws InterruptedException {
 		BlockingQueue queue = new ArrayBlockingQueue(1024);
