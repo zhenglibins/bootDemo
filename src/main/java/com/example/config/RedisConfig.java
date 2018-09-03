@@ -17,7 +17,9 @@ import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.Set;
 
-
+/**
+ * redis config
+ */
 @Configuration
 public class RedisConfig {
 
