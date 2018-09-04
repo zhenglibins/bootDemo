@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.rabbitmq;
 
 import com.rabbitmq.client.*;
 
@@ -10,7 +10,7 @@ import java.io.IOException;
 public class RabbitMQTest {
     public static final String QUEUE_NAME = "MYFIRSTQUENE";
     public static void main(String args[])throws Exception{
-        sendMSG("hello,zlb");
+       sendMSG("hello,郑李斌");
 //        Thread.sleep(10000);
 //        recieveMSG();
     }
