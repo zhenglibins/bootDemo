@@ -1,17 +1,18 @@
 package com.example.test;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class ExecutorTest {
 
 	public static void main(String[] args) {
-		
-		submitTest();
+
+		submitCallable();
 	}
-	
+
+	public static void testExecutors(){
+		ExecutorService executorService = Executors.newFixedThreadPool(20);
+
+	}
 	public static void executeTest() {
 		ExecutorService executorService = Executors.newSingleThreadExecutor();  
 		 
@@ -21,6 +22,25 @@ public class ExecutorTest {
 		    }  
 		});  
 		 
+		executorService.shutdown();
+	}
+	public static void submitCallable(){
+		ExecutorService executorService = Executors.newSingleThreadExecutor();
+		Future f = executorService.submit(new Callable<String>(){
+
+			@Override
+			public String call() throws Exception {
+				Thread.sleep(10000);
+				return "100";
+			}
+		});
+		try {
+			System.out.println(f.get());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
 		executorService.shutdown();
 	}
 	public static void submitTest() {
