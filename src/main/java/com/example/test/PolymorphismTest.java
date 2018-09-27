@@ -1,5 +1,6 @@
 package com.example.test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,6 +13,7 @@ public class PolymorphismTest {
         System.out.println("hello" + i);
         HashMap map;
         ArrayList al;
+        BigDecimal b;
         return i;
     }
 

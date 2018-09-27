@@ -12,8 +12,7 @@ public class countDownLatchTest {
 		 
 		new Thread(waiter)     .start();
 		new Thread(decrementer).start();
-		 
-		Thread.sleep(10000);
+
 	}
 
 }
@@ -28,6 +27,8 @@ public class countDownLatchTest {
  
     public void run() {
         try {
+            //等待线程结束
+            System.out.println("等待线程结束");
             latch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();

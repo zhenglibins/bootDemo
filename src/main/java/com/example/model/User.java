@@ -1,6 +1,7 @@
 package com.example.model;
 
 import java.io.*;
+import java.util.HashMap;
 
 public class User implements Serializable{
     private Integer userId;
@@ -43,12 +44,33 @@ public class User implements Serializable{
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public static void main(String args[]){
-        writeObj();
-        readObj();
+    public static void main(String args[]) throws IOException {
+        HashMap<String,String> hashMap = new HashMap<String,String>();
+        hashMap.put("1","test");
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("obj.txt"))) {
+            try {
+                oos.writeObject(hashMap);
+                oos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            try (ObjectInputStream ooi = new ObjectInputStream(new FileInputStream("obj.txt"))) {
+                HashMap hashMap1 = (HashMap) ooi.readObject();
+                System.out.println(hashMap1);
+                ooi.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //writeObj();
+        //readObj();
     }
 
-    public static void writeObj()  {
+    public static void writeObj(Object obj)  {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("obj.txt"));
             User user = new User();
