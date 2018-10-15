@@ -29,7 +29,6 @@ public class DynamicDataSourceAspect {
         try {
             // 得到访问的方法对象
             Method method = className.getMethod(methodName, argClass);
-
             // 判断是否存在@DS注解
             if (method.isAnnotationPresent(DS.class)) {
                 DS annotation = method.getAnnotation(DS.class);
