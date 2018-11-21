@@ -29,8 +29,10 @@ public class loaderTest {
 		
 		person p = new person("zheng",31);
 
-		person2 p2 = new person2("zheng",31);
-	
+		person p2 = new person("zheng",32);
+		System.out.println(p == p2);
+		System.out.println(p.equals(p2));
+		System.out.print(p.hashCode() + "  "+p2.hashCode());
 		HashMap map = new HashMap();
 		map.put(p, 1);
 		map.put(p2, 2);
@@ -112,7 +114,7 @@ class person {
 
 	@Override
 	public int hashCode() {
-		return 100;
+		return name.hashCode();
 	}
 
 

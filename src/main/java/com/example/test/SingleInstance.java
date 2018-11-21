@@ -11,6 +11,11 @@ public class SingleInstance {
 
     public static SingleInstance getInstance1(){
         if(instance == null){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             instance =  new SingleInstance();
         }
         return instance;
@@ -18,6 +23,11 @@ public class SingleInstance {
 
 
     public synchronized static SingleInstance getInstance2(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if(instance == null){
             instance =  new SingleInstance();
         }
@@ -43,7 +53,7 @@ public class SingleInstance {
     }
 
     public static void main(String args[]){
-        for(int i = 0 ; i<10000;i++){
+        for(int i = 0 ; i<10;i++){
             new Thread(new testins()).start();
         }
 
