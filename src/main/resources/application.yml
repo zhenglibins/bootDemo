@@ -4,7 +4,7 @@ application:
   title: boot项目
 spring:
     profiles:
-        active: redis
+        active: redis,other
     datasource:
         name: test
         url: jdbc:mysql://127.0.0.1:3306/bootDemo

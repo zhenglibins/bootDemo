@@ -57,6 +57,7 @@ public class SelectSockets {
                 }
                 //从selected set中移除这个key，因为它已经被处理过了
                 it.remove();
+                System.out.println();
             }
         }
     }

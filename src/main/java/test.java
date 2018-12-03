@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -8,8 +11,11 @@ import java.util.Optional;
  */
 public class test {
     public static void main(String args[]){
-        System.out.println(Character.MIN_RADIX);
-        System.out.println(Integer.parseInt("123",16));
+//        LocalDate ld1 = LocalDate.of(2017,5,23);
+//        LocalDate ld2 = LocalDate.of(2018,11,22);
+//        System.out.println(Period.between(ld1,ld2));
+        List<String> list = new ArrayList<String>();
+        list.add(null);
     }
 
     public static void testLocalDateTime(){
