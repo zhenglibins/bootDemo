@@ -46,4 +46,3 @@ ${application.title}
 ${spring-boot.version}
 boot starter
 配置参数样例
--Dserver.port=82 -Dspring.cloud.config.profile=test -Deureka.client.serviceUrl.defaultZone=http://10.100.14.107:21111/eureka/
