@@ -18,23 +18,5 @@ public class test {
         list.add(null);
     }
 
-    public static void testLocalDateTime(){
-        int deadline= 25;
 
-        LocalDate ld1 = LocalDate.of(2018,3,1);
-        LocalDate ld2 = LocalDate.of(2018,3,5);
-        if(deadline>=25){
-            if(ld1.plusDays(25).compareTo(ld2)>0){
-                System.out.println("不能转让");
-            }else{
-                System.out.println("能转让");
-            }
-        }else{
-            if(ld1.plusDays(deadline).compareTo(ld2)>0){
-                System.out.println("不能转让");
-            }else{
-                System.out.println("能转让");
-            }
-        }
-    }
 }
