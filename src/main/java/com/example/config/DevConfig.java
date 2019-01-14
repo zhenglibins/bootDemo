@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 public class DevConfig  implements CommandLineRunner {
 
 
-    @Value("${username}")
+    @Value("${usernames}")
     public String username;
 
     @Override
