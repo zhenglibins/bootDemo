@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by TDW on 2018/12/3.
+ * Created by zhenglibin on 2018/12/3.
  */
 @Configuration
 public class OtherConfig  implements CommandLineRunner {
