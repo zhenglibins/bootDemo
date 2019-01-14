@@ -10,7 +10,7 @@ import java.io.IOException;
 public class RabbitMQTest {
     public static final String QUEUE_NAME = "MYFIRSTQUENE";
     public static void main(String args[])throws Exception{
-       sendMSG("hello,郑李斌");
+       sendMSG("hello,zhenglibin");
 //        Thread.sleep(10000);
 //        recieveMSG();
     }
