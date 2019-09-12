@@ -34,10 +34,11 @@ import java.util.Properties;
         transactionManagerRef="mainTransactionManager",
         basePackages= { "com.example.respository" }) //不同数据库需要设置Repository所在位置
 public class mainDataJpa implements ApplicationContextAware {
-    private String sourceName = DataSourceNames.MAIN;
+    private String ds = DataSourceNames.MAIN;
     @Autowired
-    private Environment env; //1
+    private Environment env;
     private ApplicationContext applicationContext;
+
 
     /**
      * 主 TransactionManager配置 事务配置
@@ -55,7 +56,18 @@ public class mainDataJpa implements ApplicationContextAware {
     @Qualifier("mainEntityManagerFactory")
     @Primary
     public LocalContainerEntityManagerFactoryBean mainEntityManagerFactory(){
-        DataSource ds = this.applicationContext.getBean(sourceName, DruidDataSource.class);
+        DruidDataSource dataSource = new DruidDataSource();
+        Environment environment = (Environment)this.applicationContext.getBean(Environment.class);
+
+        String url = environment.getProperty(ds + ".url");
+        String username = environment.getProperty(ds + ".username");
+        String password = environment.getProperty(ds + ".password");
+        String driverClass = environment.getProperty(ds + ".driver-class-name");
+        dataSource.setDriverClassName(driverClass);
+        dataSource.setPassword(password);
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        this.initDruidDataSource(dataSource);
 //        return builder.dataSource(ds)
 //                .properties(getDefaultHibernateProps())
 //                .packages("com.example.respository")
@@ -68,7 +80,7 @@ public class mainDataJpa implements ApplicationContextAware {
         LocalContainerEntityManagerFactoryBean factory =
                 new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setDataSource(ds);
+        factory.setDataSource(dataSource);
         factory.setPackagesToScan("com.example.respository","com.example.entity");
 //        Properties jpaProperties = new Properties();
 //        jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
@@ -81,5 +93,35 @@ public class mainDataJpa implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+    }
+    private void initDruidDataSource(DruidDataSource dataSource) {
+        try {
+            if(dataSource.getMaxActive() == 8 || dataSource.getMaxActive() == 5) {
+                dataSource.setMaxActive(100);
+            }
+
+            if(dataSource.getInitialSize() == 0 || dataSource.getInitialSize() == 1) {
+                dataSource.setInitialSize(10);
+            }
+
+            if(dataSource.getMinIdle() == 0) {
+                dataSource.setMinIdle(10);
+            }
+
+            if(!dataSource.isPoolPreparedStatements()) {
+                dataSource.setMaxPoolPreparedStatementPerConnectionSize(5);
+            }
+
+            if(dataSource.getMaxWait() < 0L || dataSource.getMaxWait() > 5000L) {
+                dataSource.setMaxWait(5000L);
+            }
+
+            if(dataSource.getValidationQuery() == null) {
+                dataSource.setValidationQuery("SELECT 'x'");
+            }
+        } catch (Exception var3) {
+
+        }
+
     }
 }

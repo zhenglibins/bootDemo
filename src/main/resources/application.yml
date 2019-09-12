@@ -4,7 +4,7 @@ application:
   title: boot项目
 spring:
     profiles:
-        active: redis,other,jpa
+        active: redis,other
 mybatis:
   mapper-locations: classpath*:mapping/*Mapper.xml
 
