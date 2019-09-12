@@ -19,6 +19,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -77,7 +78,7 @@ public class DatasourceConfig implements BeanDefinitionRegistryPostProcessor,Ini
         sessionFactory.setMapperLocations(resolver.getResources("classpath:mapping/*.xml"));
         List<Interceptor> interceptors = new ArrayList();
         Properties properties = new Properties();
-        properties.put("dialect", "sqlserver");
+        properties.put("dialect", "Mysql");
         sessionFactory.setConfigurationProperties(properties);
         return sessionFactory.getObject();
     }

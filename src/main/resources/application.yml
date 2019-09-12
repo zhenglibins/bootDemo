@@ -4,13 +4,14 @@ application:
   title: boot项目
 spring:
     profiles:
-        active: redis,other
+        active: redis,other,jpa
 mybatis:
   mapper-locations: classpath*:mapping/*Mapper.xml
 
 hibernate:
   hbm2ddl:
-    auto:
+    auto: update
+  show-sql: true
 
 db:
   ds:
@@ -19,7 +20,7 @@ db:
       jdbc-url: jdbc:mysql://47.106.214.38:3306/mytest
       url: jdbc:mysql://47.106.214.38:3306/mytest
       username: root
-      password: root
+      password: Zlb12345!
       # 使用druid数据源
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.jdbc.Driver
