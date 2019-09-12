@@ -25,14 +25,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
-                .loginPage("/login")
-                .and()
-                .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and().csrf().disable().cors();
+        http.authorizeRequests().anyRequest().permitAll();
+//        http.formLogin()
+//                .loginPage("/login")
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/login").permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and().csrf().disable().cors();
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

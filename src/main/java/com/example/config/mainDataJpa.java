@@ -5,6 +5,8 @@ import com.example.ds.DataSourceNames;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -52,22 +54,19 @@ public class mainDataJpa implements ApplicationContextAware {
         JpaTransactionManager transactionManager = new JpaTransactionManager(mainEntityManagerFactory.getObject());
         return transactionManager;
     }
+
+    @Bean("jpaDataSource")
+    @ConfigurationProperties(DataSourceNames.MAIN)
+    public DataSource jpaDataSource() {
+        return DataSourceBuilder.create().type(DruidDataSource.class).build();
+    }
+
     @Bean
     @Qualifier("mainEntityManagerFactory")
     @Primary
-    public LocalContainerEntityManagerFactoryBean mainEntityManagerFactory(){
-        DruidDataSource dataSource = new DruidDataSource();
+    public LocalContainerEntityManagerFactoryBean mainEntityManagerFactory(@Qualifier("jpaDataSource") DataSource ds){
         Environment environment = (Environment)this.applicationContext.getBean(Environment.class);
-
-        String url = environment.getProperty(ds + ".url");
-        String username = environment.getProperty(ds + ".username");
-        String password = environment.getProperty(ds + ".password");
-        String driverClass = environment.getProperty(ds + ".driver-class-name");
-        dataSource.setDriverClassName(driverClass);
-        dataSource.setPassword(password);
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        this.initDruidDataSource(dataSource);
+        this.initDruidDataSource((DruidDataSource)ds);
 //        return builder.dataSource(ds)
 //                .properties(getDefaultHibernateProps())
 //                .packages("com.example.respository")
@@ -80,7 +79,7 @@ public class mainDataJpa implements ApplicationContextAware {
         LocalContainerEntityManagerFactoryBean factory =
                 new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setDataSource(dataSource);
+        factory.setDataSource(ds);
         factory.setPackagesToScan("com.example.respository","com.example.entity");
 //        Properties jpaProperties = new Properties();
 //        jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
