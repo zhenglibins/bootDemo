@@ -3,6 +3,7 @@ package com.example.Controller;
 import com.example.config.propertiesGetConfig;
 import com.example.model.User;
 import com.example.service.UserService;
+import com.example.util.CookieUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -46,6 +47,7 @@ public class UserController implements CommandLineRunner {
     public String world(ModelMap map) {
 
         map.addAttribute("host", "http://www.shanshan.com");
+        CookieUtil.setCookie(".baidu.com","test","test",false,100000);
         return "world";
     }
 

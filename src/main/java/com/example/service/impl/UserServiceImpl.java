@@ -25,7 +25,6 @@ public class UserServiceImpl implements UserService {
     private DemoDao demodao;//这里会报错，但是并不会影响
 
     public int addUser(User user) {
-
         return userMapper.insertSelective(user);
     }
 

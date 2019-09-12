@@ -60,8 +60,6 @@ public class DatasourceConfig implements BeanDefinitionRegistryPostProcessor,Ini
             }
             dataSourceMap.put(DataSourceNames.DS1,dataSource);
         }
-
-
         // 将 master 和 slave 数据源作为指定的数据源
         dynamicRoutingDataSource.setTargetDataSources(dataSourceMap);
         System.out.println("初始化动态数据源"+dataSourceMap);

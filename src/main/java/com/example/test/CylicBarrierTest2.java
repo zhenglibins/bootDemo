@@ -6,9 +6,9 @@ import java.util.concurrent.*;
  * Created by zhenglibin on 2018/9/26.
  */
 public class CylicBarrierTest2 {
-    public static void main(String[] args) {
+       public static void main(String[] args) {
 
-        testConcurrent(3,4);
+        testConcurrent(3,10);
     }
 
     /**
