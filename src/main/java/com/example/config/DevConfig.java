@@ -12,7 +12,9 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = "classpath:dev.properties")
 public class DevConfig  implements CommandLineRunner {
 
-
+    public DevConfig(){
+        System.out.println("初始化DevConfig");
+    }
     @Value("${usernames}")
     public String username;
 

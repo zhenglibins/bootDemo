@@ -34,10 +34,13 @@ class producer implements Runnable{
 	public void run() {
 		try {
             queue.put("1");
+            System.out.println("quene put 1");
             Thread.sleep(1000);
             queue.put("2");
+            System.out.println("quene put 2");
             Thread.sleep(1000);
             queue.put("3");
+            System.out.println("quene put 3");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -55,9 +58,9 @@ class consumer implements Runnable{
 	@Override
 	public void run() {
 		try {
-            System.out.println(queue.take());
-            System.out.println(queue.take());
-            System.out.println(queue.take());
+            System.out.println("take " + queue.take());
+            System.out.println("take " + queue.take());
+            System.out.println("take " + queue.take());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
